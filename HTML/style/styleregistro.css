@@ -1,0 +1,106 @@
+/* Fondo general */
+body {
+  font-family: 'Roboto', 'Verdana', sans-serif;
+  margin: 0;
+  background: linear-gradient(90deg, #7a2323, #aa3642, #d94c5a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Caja principal */
+main {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  width: 95%;          /* ocupa casi todo el ancho */
+  max-width: 520px;    /* límite para que no se estire demasiado */
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo img {
+  max-height: 110px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+/* Encabezado */
+header h1 {
+  color: #7a2323;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+header p {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+/* Labels e inputs */
+label {
+  display: block;
+  text-align: left;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #333;
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+/* Casilla de autorización */
+.options {
+  margin-top: 15px;
+  text-align: left;
+}
+.options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;           /* espacio entre casilla y texto */
+  font-size: 0.9em;
+  color: #333;
+  line-height: 1.4;    /* mejora legibilidad */
+}
+.options input[type="checkbox"] {
+  margin-top: 2px;     /* ajusta alineación vertical */
+}
+
+/* Botones */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-login {
+  background-color: #7a2323;
+  color: #fff;
+}
+.btn-login:hover {
+  background-color: #aa3642;
+}
+.btn-register {
+  background-color: #28A745;
+  color: #fff;
+}
+.btn-register:hover {
+  background-color: #218838;
+}
+

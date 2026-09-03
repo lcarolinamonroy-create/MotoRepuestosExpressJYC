@@ -1,0 +1,139 @@
+/* Fondo general */
+body {
+  font-family: 'Roboto', 'Verdana', sans-serif;
+  margin: 0;
+  background: linear-gradient(90deg, #7a2323, #aa3642, #d94c5a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Caja de login */
+main {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  width: 380px;
+  text-align: center;
+}
+
+/* Logo */
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.logo img {
+  max-height: 120px;   /* controla altura máxima */
+  width: auto;         /* mantiene proporción */
+  object-fit: contain; /* evita deformación */
+  display: block;
+  margin: 0 auto 20px;  /* centra el logo */
+}
+
+/* Encabezado */
+header h1 {
+  color: #7a2323;
+  font-weight: bold;
+  font-size: 1.6em;
+  margin-bottom: 8px;
+}
+header h2 {
+  color: #333;
+  font-size: 1.3em;
+  margin-bottom: 5px;
+}
+header p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 0.95em;
+}
+
+/* Labels e inputs */
+label {
+  display: block;
+  text-align: left;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+input:focus {
+  border-color: #28A745;
+  box-shadow: 0 0 6px rgba(40,167,69,0.4);
+}
+
+/* Opciones (recordar + link) */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 0.9em;
+}
+.options a {
+  color: #7a2323;
+  text-decoration: none;
+}
+.options a:hover {
+  color: #aa3642;
+}
+
+/* Botones */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-login {
+  background-color: #7a2323;
+  color: #fff;
+}
+.btn-login:hover {
+  background-color: #aa3642;
+}
+.btn-register {
+  background-color: #28A745;
+  color: #fff;
+}
+.btn-register:hover {
+  background-color: #218838;
+}
+
+/* Términos */
+.terms {
+  margin-top: 15px;
+  font-size: 0.8em;
+  color: #666;
+}
+.terms a {
+  color: #7a2323;
+  text-decoration: none;
+}
+.terms a:hover {
+  color: #aa3642;
+}
+
+/* Footer */
+footer {
+text-align: center;
+  margin-top: 20px;        /* espacio respecto a la caja */
+  color: #555;             /* gris discreto */
+  font-size: 0.85em;       /* más pequeño */
+  background: none; 
+}
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación de Interfaz - Motorepuestos Express</title>
+    <style>
+        /* Estilos básicos para presentar la documentación de forma limpia */
+        :root {
+            --color-principal: #d32f2f; /* Rojo característico de motores/repuestos */
+            --color-fondo: #f4f4f9;
+            --color-texto: #333;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: var(--color-fondo); 
+            color: var(--color-texto); 
+        }
+        .contenedor {
+            max-width: 900px;
+            margin: auto;
+        }
+        header { 
+            background: #222; 
+            color: #fff; 
+            padding: 20px; 
+            text-align: center; 
+            border-radius: 8px 8px 0 0; 
+            border-bottom: 5px solid var(--color-principal);
+        }
+        h1, h2, h3 { color: #222; }
+        header h1 { color: #fff; margin: 0; }
+        header p { color: #ccc; margin-top: 5px; }
+        section { 
+            background: #fff; 
+            margin-bottom: 20px; 
+            padding: 25px; 
+            border-radius: 0 0 8px 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        code { 
+            background: #e8e8e8; 
+            color: #c62828;
+            padding: 3px 6px; 
+            border-radius: 4px; 
+            font-weight: bold;
+        }
+        .alerta { 
+            background-color: #e3f2fd; 
+            border-left: 6px solid #1976d2; 
+            padding: 15px; 
+            margin: 15px 0; 
+            border-radius: 4px;
+        }
+        .etiqueta-html {
+            color: #1976d2;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>Análisis de Interfaz Gráfica</h1>
+            <p>Documentación de maquetación para: Motorepuestos Express</p>
+        </header>
+
+        <section>
+            <h2>1. Estructura General (Layout)</h2>
+            <div class="alerta">
+                <strong>Enfoque Semántico:</strong> La interfaz está pensada para ser maquetada utilizando HTML5. Esto permite que el código sea comprensible tanto para los desarrolladores como para los navegadores.
+            </div>
+            <p>El diseño gráfico del aplicativo se traduce en las siguientes áreas principales de código:</p>
+            <ul>
+                <li><span class="etiqueta-html">&lt;header&gt;</span>: Ubicado en la parte superior. Contiene el logotipo del proyecto y la barra de navegación principal (para ir al inicio, catálogo, contacto, etc.).</li>
+                <li><span class="etiqueta-html">&lt;main&gt;</span>: Es el contenedor central y más importante. Aquí cambia el contenido dinámicamente según lo que el usuario esté buscando.</li>
+                <li><span class="etiqueta-html">&lt;aside&gt;</span>: Un panel lateral opcional, ideal para colocar filtros de búsqueda (ej. buscar repuestos por marca, cilindraje o precio).</li>
+                <li><span class="etiqueta-html">&lt;footer&gt;</span>: El pie de página con información de contacto, enlaces a redes sociales y derechos de autor.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Lógica del Módulo de Accesorios</h2>
+            <p>Basado en los recursos gráficos (como el archivo <code>accesorios.png</code> analizado anteriormente), la sección del catálogo de productos sigue un diseño basado en "Grid" (cuadrícula) utilizando tarjetas (Cards).</p>
+            
+            <h3>Estructura de una "Tarjeta de Producto" (Card)</h3>
+            <p>Para cada ítem en la tienda (por ejemplo, chaquetas reflectivas, guantes, cascos), el HTML sugerido dentro de la sección principal sería un <span class="etiqueta-html">&lt;article&gt;</span> o un <span class="etiqueta-html">&lt;div class="card"&gt;</span> que debe contener:</p>
+            <ol>
+                <li><strong>Contenedor de Imagen:</strong> Una etiqueta <code>&lt;img src="ux/accesorios.png"&gt;</code> que carga el gráfico correspondiente al producto.</li>
+                <li><strong>Título del Producto:</strong> Un <code>&lt;h3&gt;</code> con el nombre exacto del artículo.</li>
+                <li><strong>Precio:</strong> Una etiqueta <code>&lt;p class="precio"&gt;</code> destacando el valor.</li>
+                <li><strong>Botón de Acción:</strong> Un botón <code>&lt;button&gt;Agregar al Carrito&lt;/button&gt;</code> para interactuar con la compra.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>3. Flujo de Navegación (UX)</h2>
+            <p>La lógica visual dicta cómo interactúa el usuario con la plataforma:</p>
+            <ul>
+                <li><strong>Inicio:</strong> El usuario es recibido con banners promocionales de repuestos destacados.</li>
+                <li><strong>Exploración:</strong> Al hacer clic en una categoría (ej. "Accesorios"), el sistema oculta el contenido anterior y carga los productos correspondientes en el <code>&lt;main&gt;</code>.</li>
+                <li><strong>Interactividad:</strong> Las imágenes (como las PNG) están optimizadas para cargarse rápido y proporcionar una representación visual clara antes de la decisión de compra.</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

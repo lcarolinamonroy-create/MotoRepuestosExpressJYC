@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras - Moto Repuestos Express JYC</title>
+  <link rel="stylesheet" href="style/stylecarrito.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+    <img src="IMG/jyclogo.png" alt="MotoRepuestos Express JYC">
+    </div>
+    <a href="index.html" class="icon-link">
+    <i class="fa-solid fa-arrow-left"></i> Volver al catálogo
+    </a>
+  </header>
+
+  <h1>Carrito de Compras</h1>
+
+  <!-- Carrito -->
+  <main id="carrito">
+    <h2>Productos en tu carrito</h2>
+    <ul id="lista-carrito">
+  <!-- Aquí se insertarán los productos dinámicamente -->
+</ul>
+<p id="total">Total: $0</p>
+    <div class="acciones">
+    <button id="vaciar">Vaciar Carrito</button>
+    <button id="comprar">Finalizar Compra</button>
+    </div>
+  </main>
+  <!-- Formulario oculto (modal) -->
+<div id="form-pago" class="modal">
+  <div class="modal-contenido">
+    <h2>Formulario de Pago</h2>
+    <form id="form-pedido">
+      <label>Nombre completo:</label>
+      <input type="text" required>
+
+      <label>Correo electrónico:</label>
+      <input type="email" required>
+
+      <label>Teléfono:</label>
+      <input type="tel" required>
+
+      <label>Dirección de entrega:</label>
+      <input type="text" required>
+
+      <button type="submit">Enviar pedido</button>
+    </form>
+    <button id="cerrar">Cerrar</button>
+  </div>
+</div>
+  <footer>
+    © 2026 Moto Repuestos Express JYC
+  </footer>
+  <!--Script para leer localStorage -->
+  <script>
+    // Recuperar productos guardados en localStorage
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    const lista = document.getElementById("lista-carrito");
+    const total = document.getElementById("total");
+
+    let suma = 0;
+
+    if (carrito.length > 0) {
+      carrito.forEach((prod, indice) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span class="nombre">${prod.nombre}</span>
+          <span class="precio">${prod.precio}</span>
+          <button type="button" class="btn-eliminar" data-indice="${indice}">Eliminar</button>
+        `;
+        lista.appendChild(li);
+
+        // Convertir precio a número (quitando $ y puntos)
+        const valor = parseInt(prod.precio.replace("$","").replace(".","").replace(".",""));
+        suma += valor;
+      });
+      total.textContent = "Total: $" + suma;
+    } else {
+      lista.innerHTML = "<p>Tu carrito está vacío 🛒</p>";
+    }
+
+    // Vaciar carrito
+  document.getElementById("vaciar").addEventListener("click", () => {
+      localStorage.removeItem("carrito");
+      lista.innerHTML = "<p>Tu carrito está vacío 🛒</p>";
+      total.textContent = "Total: $0";
+    });
+
+  // Abrir modal al dar click en Finalizar Compra
+  document.getElementById("comprar").addEventListener("click", () => {
+    document.getElementById("form-pago").style.display = "flex";
+  });
+
+  // Permitir retirar productos individualmente.
+  lista.addEventListener("click", (evento) => {
+    const boton = evento.target.closest(".btn-eliminar");
+    if (!boton) return;
+    carrito.splice(Number(boton.dataset.indice), 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    window.location.reload();
+  });
+
+  // Cerrar modal
+  document.getElementById("cerrar").addEventListener("click", () => {
+    document.getElementById("form-pago").style.display = "none";
+  });
+
+  document.getElementById("form-pedido").addEventListener("submit", (evento) => {
+    evento.preventDefault();
+    if (!carrito.length) {
+      alert("Agrega al menos un producto antes de enviar el pedido.");
+      return;
+    }
+    alert("Pedido registrado como demostración front-end. Un asesor debe confirmar el pago por un canal seguro.");
+    localStorage.removeItem("carrito");
+    window.location.reload();
+  });
+  </script>
+</body>
+</html>
+

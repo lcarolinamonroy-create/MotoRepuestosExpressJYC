@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moto Repuestos Express JYC</title>
+
+  <!--Vinculación CSS--> 
+  <link rel="stylesheet" href="style/styles.css">
+
+  <!--Font --> 
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <header class="top-header" >
+    <!--Barra superior-->
+    <section class="top-banner">
+
+      <!--Logo-->
+      <div class="logo">
+        <img src="IMG/jyclogo.png" alt="Logo JYC">
+        <span>Moto Repuestos Express JYC</span>
+      </div>
+
+      <!--Buscador-->
+      <div class="search-box">
+        <input type="text" placeholder="Buscar productos...">
+        <button>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+
+      <!--Selececcionar ciudad -->
+      <div class="city-select">
+        <label for="ciudad">Ciudad:</label>
+        <select id="ciudad">
+          <option>Bello</option>
+          <option>Medellín</option>
+          <option>Bogotá</option>
+          <option>Cali</option>
+          <option>Cartagena</option>
+        </select>
+      </div>
+
+      <!--Iconos-->
+      <div class="header-actions">
+        <a href="carrito.html" aria-label="Ver carrito"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count">0</span></a>
+        <a href="login.html" aria-label="Iniciar sesión"><i class="fa-solid fa-user"></i></a>
+        <!-- Redes sociales -->
+        <a href="https://wa.me/3117149312" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.facebook.com/motorepuestosjyc" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/motorepuestosjyc" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+
+    </section>
+
+    <!--Menú -->
+    <nav class="menu-categorias">
+       <ul>
+    <li><a href="productos.html?categoria=aceite">Aceite</a></li>
+    <li><a href="productos.html?categoria=llanta">Llantas</a></li>
+    <li><a href="productos.html?categoria=frenos">Frenos</a></li>
+    <li><a href="productos.html?categoria=transmision">Transmisión</a></li>
+    <li><a href="productos.html?categoria=lubricantes">Lubricantes</a></li>
+    <li><a href="productos.html?categoria=accesorios">Accesorios</a></li>
+    <li><a href="promociones.html" class="promo-link" aria-label="Ver promociones y ofertas"><i class="fa-solid fa-tags"></i> Promociones</a></li>
+  </ul>
+    </nav>
+
+  </header>
+
+  <!--Promociones del año-->
+  <section class="promo-banner">
+    <div class="overlay"></div>
+    <div class="promo-content">
+      <h1>Últimas Promociones del Año</h1>
+      <p>Encuentra los mejores repuestos y accesorios para tu moto.</p>
+      <a href="promociones.html" class="btn-comprar">COMPRA AHORA</a>
+    </div>
+  </section>
+
+  <section class="beneficios" aria-label="Beneficios de compra">
+    <article><i class="fa-solid fa-truck-fast"></i><div><strong>Envíos rápidos</strong><span>Recibe tus repuestos en tu zona</span></div></article>
+    <article><i class="fa-solid fa-shield-halved"></i><div><strong>Compra confiable</strong><span>Atención y acompañamiento</span></div></article>
+    <article><i class="fa-solid fa-screwdriver-wrench"></i><div><strong>Asesoría especializada</strong><span>Elige la referencia adecuada</span></div></article>
+  </section>
+
+  <!--Categorías-->
+  <main class="categorias">
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="IMG/aceite.png" alt="Aceite" class="card-img">
+      </div>
+      <h3>Aceite</h3>
+      <button class="btn-producto" data-categoria="aceite">Ver Productos</button>
+    </div>
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="IMG/llanta.png" alt="Llantas" class="card-img">
+      </div>
+      <h3>Llantas</h3>
+      <button class="btn-producto" data-categoria="llanta">Ver Productos </button>
+    </div>
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="IMG/Frenos.png" alt="Frenos" class="card-img">
+      </div>
+      <h3>Frenos</h3>
+      <button class="btn-producto" data-categoria="frenos">Ver Productos</button>
+    </div>
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="IMG/Transmision.png" alt="Transmisión" class="card-img">
+      </div>
+      <h3>Transmisión</h3>
+      <button class="btn-producto" data-categoria="transmision">Ver Productos</button>
+    </div>
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="IMG/Lubricante.png" alt="Lubricantes" class="card-img">
+      </div>
+      <h3>Lubricantes</h3>
+      <button class="btn-producto" data-categoria="lubricantes">Ver Productos</button>
+    </div>
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="IMG/accesorios.png" alt="Accesorios" class="card-img">
+      </div>
+      <h3>Accesorios</h3>
+      <button class="btn-producto" data-categoria="accesorios">Ver Productos</button>
+    </div>
+
+  </main>
+
+  <!--Footer-->
+  <footer>
+    <p>© 2026 Moto Repuestos Express JYC</p>
+  </footer>
+<script src="script.js"></script>
+</body>
+</html>

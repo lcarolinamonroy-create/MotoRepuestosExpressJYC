@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos - Moto Repuestos Express JYC</title>
+  <!--Vinculo css-->
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="style/styleproductos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!--Encabezado con logo y título dinámico-->
+  <header>
+    <div class="logo">
+      <img src="../IMG/jyclogo.png" alt="Moto Repuestos Express JYC">
+    </div>
+    <a href="carrito.html" class="btn-in-carrito">
+      <i class="fa-solid fa-cart-shopping"></i> Ver carrito
+    </a>
+  </header>
+
+  <!-- Título dinámico fuera del header -->
+<h2 id="titulo"></h2>
+   
+  <!--Contenedor donde se insertan los productos-->
+  <main id="lista-productos"></main>
+
+  <!--Footer-->
+  <footer>
+    <p>© 2026 Moto Repuestos Express JYC</p>
+  </footer>
+
+  <!--Script para mostrar productos--> 
+  <script>
+    //Obtener la categoría desde la URL
+    const params = new URLSearchParams(window.location.search);
+    const categoria = params.get("categoria");
+
+    //Mostrar el título dinámico
+    document.getElementById("titulo").textContent = "Productos de " + categoria;
+
+    //Lista de productos por categoría-->
+    const productos = {
+      aceite: [
+        { nombre: "Aceite 20W50", precio: "$30.000", img: "IMG/aceite.png" },
+        { nombre: "Aceite sintético 10W40", precio: "$45.000", img: "IMG/aceite.png" }
+      ],
+      llanta: [
+        { nombre: "Llanta 90/90-17", precio: "$120.000", img: "IMG/llanta.png" },
+        { nombre: "Llanta 100/80-18", precio: "$150.000", img: "IMG/llanta.png" }
+      ],
+      frenos: [
+        { nombre: "Pastillas de freno", precio: "$25.000", img: "IMG/Frenos.png" },
+        { nombre: "Disco de freno", precio: "$80.000", img: "IMG/Frenos.png" }
+      ],
+      transmision: [
+        { nombre: "Kit de arrastre", precio: "$200.000", img: "IMG/Transmision.png" },
+        { nombre: "Cadena reforzada", precio: "$95.000", img: "IMG/Transmision.png" }
+      ],
+      lubricantes: [
+        { nombre: "Grasa multiusos", precio: "$15.000", img: "IMG/Lubricante.png" },
+        { nombre: "Lubricante de cadena", precio: "$20.000", img: "IMG/Lubricante.png" }
+      ],
+      accesorios: [
+        { nombre: "Casco integral", precio: "$180.000", img: "IMG/accesorios.png" },
+        { nombre: "Guantes de moto", precio: "$60.000", img: "IMG/accesorios.png" }
+      ]
+    };
+
+    //Insertar productos en la página-->
+    const contenedor = document.getElementById("lista-productos");
+    if (productos[categoria]) {
+      productos[categoria].forEach(prod => {
+        const item = document.createElement("div");
+        item.classList.add("producto");
+        item.innerHTML = `
+          <img src="${prod.img}" alt="${prod.nombre}" class="img-producto">
+          <h3>${prod.nombre}</h3>
+          <p>${prod.precio}</p>
+          <button class="btn-carrito">Agregar al carrito</button>
+        `;
+        contenedor.appendChild(item);
+      });
+    } else {
+      contenedor.innerHTML = "<p>No hay productos disponibles para esta categoría.</p>";
+    }
+
+    //Evento para los botones de carrito-->
+    document.addEventListener("click", e => {
+      if (e.target.classList.contains("btn-carrito")) {
+        const nombreProducto = e.target.parentElement.querySelector("h3").textContent;
+        const precioProducto = e.target.parentElement.querySelector("p").textContent;
+
+        // Recuperar carrito actual o crear uno nuevo
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Agregar producto al carrito
+        carrito.push({ nombre: nombreProducto, precio: precioProducto });
+
+        // Guardar carrito actualizado
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        alert(nombreProducto + " agregado al carrito 🛒");
+      }
+    });
+  </script>
+</body>
+</html>
