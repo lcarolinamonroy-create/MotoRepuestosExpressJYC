@@ -1,0 +1,26 @@
+.product-filters{display:flex;gap:18px;align-items:end;flex-wrap:wrap;padding:20px;background:#fff8f4;border:1px solid #eadcdc;border-radius:12px;margin:20px;}
+.product-filters label{display:grid;gap:6px;color:#7a2323;font-weight:700;min-width:220px;}
+.product-filters input,.product-filters select{padding:10px;border:1px solid #d6baba;border-radius:6px;background:#fff;}
+.admin-page{padding:20px;}
+.admin-table-wrapper{overflow-x:auto;background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.admin-table{width:100%;border-collapse:collapse;min-width:650px;}
+.admin-table th,.admin-table td{padding:12px;text-align:left;border-bottom:1px solid #eee;}
+.admin-table th{background:#7a2323;color:#fff;}
+.stock-ok{color:#198754;font-weight:700;}
+.auth-page{min-height:calc(100vh - 190px);display:flex;justify-content:center;align-items:flex-start;padding:40px 20px;background:linear-gradient(120deg,#8c252d,#c33c4b);}
+.auth-card{width:min(100%,520px);background:#fff;border-radius:14px;padding:28px 40px;box-shadow:0 8px 24px rgba(0,0,0,.2);text-align:center;}
+.register-card{width:min(100%,650px);}
+.recovery-card{width:min(100%,520px);}
+.auth-logo{width:100px;height:100px;object-fit:contain;margin-bottom:8px;}
+.auth-card h1{color:#87252b;margin:8px 0 12px;}
+.auth-card p{color:#555;margin:8px 0 20px;}
+.auth-card .form{text-align:left;max-width:none;padding:0;box-shadow:none;}
+.auth-card .form button,.secondary-button{display:block;width:100%;text-align:center;text-transform:uppercase;text-decoration:none;margin-top:8px;}
+.secondary-button{background:#28a745;color:#fff;padding:10px 15px;border-radius:5px;}
+.login-options{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 10px;}
+.login-options a{color:#a1292f;text-decoration:none;}
+.checkbox-label{display:flex!important;grid-template-columns:none!important;align-items:center;gap:7px;font-size:14px;}
+.checkbox-label input{width:auto!important;}
+.header-actions a{font-weight:700;min-width:26px;text-align:center;}
+.social-icon{display:inline-block;width:25px;height:25px;fill:currentColor;vertical-align:middle;}
+@media(max-width:600px){.auth-card{padding:24px 20px}.login-options{align-items:flex-start;flex-direction:column}.register-card{width:100%;}}

@@ -1,0 +1,45 @@
+MOTO REPUESTOS EXPRESS JYC
+Guía para el instructor Denis
+
+Descripción:
+Este proyecto corresponde al módulo front-end de Moto Repuestos Express JYC,
+desarrollado con React, JavaScript, React Router, CSS y Vite.
+
+El sistema permite consultar productos y categorías, buscar artículos, agregar
+productos al carrito, consultar promociones y visualizar formularios de acceso,
+registro y recuperación de contraseña.
+
+Nota:
+Las funciones de autenticación, pagos, base de datos e inventario en tiempo real
+se presentan como demostración front-end. Su integración corresponde a una etapa
+posterior mediante un backend, una API y una base de datos.
+
+Pasos para ejecutar el proyecto:
+
+1. Abrir una terminal o PowerShell dentro de la carpeta ProyectoReact.
+2. Instalar las dependencias con el comando:
+
+   npm install
+
+3. Iniciar el servidor de desarrollo con:
+
+   npm run dev
+
+4. Abrir en el navegador la dirección indicada por Vite, normalmente:
+
+   http://localhost:5173/
+
+Rutas principales para revisar:
+
+   /                 Página de inicio
+   /productos        Catálogo de productos
+   /promociones      Productos en promoción
+   /carrito          Carrito de compras
+   /login            Inicio de sesión
+   /registro         Registro de usuario
+   /recuperar        Recuperación de contraseña
+   /admin            Vista inicial de inventario
+
+Repositorio:
+https://github.com/lcarolinamonroy-create/MotoRepuestosExpressJYC
+

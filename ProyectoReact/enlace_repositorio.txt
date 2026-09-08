@@ -1,0 +1,5 @@
+Repositorio del proyecto Moto Repuestos Express JYC:
+https://github.com/lcarolinamonroy-create/MotoRepuestosExpressJYC
+
+Página publicada del prototipo original:
+https://lcarolinamonroy-create.github.io/MotoRepuestosExpressJYC/HTML/index.html
