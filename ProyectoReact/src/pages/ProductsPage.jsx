@@ -1,35 +1,102 @@
-import {useState} from "react";
-import {useSearchParams} from "react-router-dom";
-import {productos} from "../data";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import {useCart} from "../context/CartContext";
 import ProductFilters from "../components/ProductFilters";
+import { useCart } from "../context/CartContext";
+import { getProducts } from "../services/productService";
 
-export default function ProductsPage(){
+// Relaciona cada categoría con una imagen existente del proyecto.
+const categoryImages = {
+  aceite: "/IMG/aceite20w50.jpg",
+  llanta: "/IMG/llanta9090.jpg",
+  frenos: "/IMG/pastillas.jpg",
+  transmision: "/IMG/kitarrastre.jpg",
+  lubricantes: "/IMG/grasa.jpg",
+  accesorios: "/IMG/casco.jpg"
+};
+
+export default function ProductsPage() {
   const [params] = useSearchParams();
-  // La categoría llega desde los enlaces del inicio, por ejemplo ?categoria=llanta.
   const category = params.get("categoria");
-  const [filters, setFilters] = useState({searchText: "", selectedCategory: ""});
+
+  const [products, setProducts] = useState([]);
+  const [filters, setFilters] = useState({
+    searchText: "",
+    selectedCategory: ""
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const apiProducts = await getProducts();
+
+        const productsWithImages = apiProducts.map(product => ({
+          ...product,
+          imagen: categoryImages[product.categoria] || "/IMG/aceite.png"
+        }));
+
+        setProducts(productsWithImages);
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
   const activeCategory = filters.selectedCategory || category;
-  const visibleProducts = productos.filter(product => {
-    const matchesCategory = !activeCategory || product.categoria === activeCategory;
-    const matchesSearch = product.nombre.toLowerCase().includes(filters.searchText.toLowerCase());
+
+  const visibleProducts = products.filter(product => {
+    const matchesCategory =
+      !activeCategory || product.categoria === activeCategory;
+
+    const matchesSearch = product.nombre
+      .toLowerCase()
+      .includes(filters.searchText.toLowerCase());
+
     return matchesCategory && matchesSearch;
   });
-  const {addToCart} = useCart();
 
   function handleAddToCart(product) {
     addToCart(product);
     alert(`${product.nombre} fue agregado al carrito.`);
   }
 
-  return <main>
-    <h1>Productos {activeCategory && `de ${activeCategory}`}</h1>
-    <ProductFilters onFilter={setFilters} />
-    <section className="productos">
-      {visibleProducts.length > 0
-        ? visibleProducts.map(product => <ProductCard key={product.id} producto={product} onAdd={handleAddToCart} />)
-        : <p>No se encontraron productos con esos criterios.</p>}
-    </section>
-  </main>;
+  if (isLoading) {
+    return <main><p>Cargando productos...</p></main>;
+  }
+
+  if (errorMessage) {
+    return <main><p>{errorMessage}</p></main>;
+  }
+
+  return (
+    <main>
+      <h1>
+        Productos {activeCategory && `de ${activeCategory}`}
+      </h1>
+
+      <ProductFilters onFilter={setFilters} />
+
+      <section className="productos">
+        {visibleProducts.length > 0 ? (
+          visibleProducts.map(product => (
+            <ProductCard
+              key={product.id}
+              producto={product}
+              onAdd={handleAddToCart}
+            />
+          ))
+        ) : (
+          <p>No se encontraron productos.</p>
+        )}
+      </section>
+    </main>
+  );
 }
