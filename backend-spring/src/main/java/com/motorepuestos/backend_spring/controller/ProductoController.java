@@ -62,6 +62,30 @@ public class ProductoController {
     }
 
     /**
+     * Actualiza un producto existente.
+     *
+     * URL: PUT /api/productos/{id}
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Producto> actualizarProducto(
+            @PathVariable Long id,
+            @Valid @RequestBody Producto datosProducto) {
+
+        return productoService.buscarPorId(id)
+                .map(productoExistente -> {
+                    productoExistente.setNombre(datosProducto.getNombre());
+                    productoExistente.setCategoria(datosProducto.getCategoria());
+                    productoExistente.setPrecio(datosProducto.getPrecio());
+                    productoExistente.setStock(datosProducto.getStock());
+
+                    return ResponseEntity.ok(
+                            productoService.guardarProducto(productoExistente)
+                    );
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
      * Elimina un producto.
      *
      * URL: DELETE /api/productos/{id}

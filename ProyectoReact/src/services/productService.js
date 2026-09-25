@@ -13,3 +13,35 @@ export async function getProducts() {
 
   return response.json();
 }
+
+/**
+ * Actualiza un producto existente desde el módulo administrativo.
+ */
+export async function updateProduct(id, product) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(product)
+  });
+
+  if (!response.ok) {
+    throw new Error("No fue posible actualizar el producto.");
+  }
+
+  return response.json();
+}
+
+/**
+ * Elimina un producto desde el módulo administrativo.
+ */
+export async function deleteProduct(id) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE"
+  });
+
+  if (!response.ok) {
+    throw new Error("No fue posible eliminar el producto.");
+  }
+}
