@@ -45,3 +45,21 @@ export async function deleteProduct(id) {
     throw new Error("No fue posible eliminar el producto.");
   }
 }
+
+/** Registra un pedido y descuenta las cantidades del inventario. */
+export async function createOrder(items) {
+  const response = await fetch("http://localhost:8080/api/pedidos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(items)
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || "No fue posible registrar el pedido.");
+  }
+
+  return response.json();
+}

@@ -1,5 +1,7 @@
+import { useState } from "react";
 import {useCart} from "../context/CartContext";
 import "../cart.css";
+import { createOrder } from "../services/productService";
 
 export default function CartPage(){
   const {
@@ -9,9 +11,23 @@ export default function CartPage(){
     updateQuantity,
     cartTotal
   } = useCart();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleCheckout() {
-    alert("Pedido registrado como demostración front-end.");
+  async function handleCheckout() {
+    try {
+      setIsSubmitting(true);
+      const items = cartItems.map(item => ({
+        productoId: item.id,
+        cantidad: item.cantidad
+      }));
+      const order = await createOrder(items);
+      clearCart();
+      alert(`Pedido #${order.id} registrado correctamente.`);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return <main><h1>Carrito de compras</h1>
@@ -33,7 +49,9 @@ export default function CartPage(){
       </ul>
       <h2>Total: $ {cartTotal.toLocaleString("es-CO")}</h2>
       <button onClick={clearCart}>Vaciar carrito</button>
-      <button onClick={handleCheckout}>Finalizar compra</button>
+      <button onClick={handleCheckout} disabled={isSubmitting}>
+        {isSubmitting ? "Registrando..." : "Finalizar compra"}
+      </button>
     </>}
   </main>;
 }
