@@ -113,6 +113,9 @@ El backend debe estar ejecutándose antes de abrir el catálogo React. Se deben 
 | POST | `/api/productos` | Registrar un producto. |
 | PUT | `/api/productos/{id}` | Actualizar un producto existente. |
 | DELETE | `/api/productos/{id}` | Eliminar un producto. |
+| POST | `/api/pedidos` | Crear un pedido desde el carrito y descontar el stock. |
+| POST | `/api/usuarios/registro` | Registrar un usuario nuevo. |
+| POST | `/api/usuarios/login` | Validar las credenciales de un usuario. |
 
 La API devuelve `400 Bad Request` cuando se envían datos inválidos, `404 Not Found` cuando no existe el identificador solicitado, `200 OK` para consultas y actualizaciones exitosas y `204 No Content` después de una eliminación exitosa.
 
@@ -126,6 +129,11 @@ La API devuelve `400 Bad Request` cuando se envían datos inválidos, `404 Not F
 - API REST para consultar y registrar productos.
 - Administración de inventario desde React.
 - Operaciones CRUD de productos.
+- Registro e inicio de sesión de usuarios.
+- Contraseñas cifradas con BCrypt.
+- Carrito con cantidades y cálculo de totales.
+- Registro de pedidos en MySQL.
+- Descuento automático del stock al confirmar un pedido.
 - Validación de datos en el backend.
 - Rechazo de datos inválidos mediante respuesta HTTP 400.
 
@@ -156,6 +164,11 @@ Las operaciones principales fueron verificadas en Postman:
 - `DELETE` de un producto con respuesta `204 No Content`.
 - `GET` posterior a la eliminación con respuesta `404 Not Found`.
 - Solicitud inválida con precio y stock negativos con respuesta `400 Bad Request`.
+- Registro exitoso de usuario con respuesta `201 Created`.
+- Inicio de sesión correcto con respuesta `200 OK`.
+- Rechazo de credenciales incorrectas con respuesta `401 Unauthorized`.
+- Rechazo de correo duplicado con respuesta `409 Conflict`.
+- Creación de pedido con respuesta `201 Created` y actualización del stock.
 
 También se verificó el módulo `/admin` de React, incluyendo la edición y actualización de un producto desde la interfaz.
 
