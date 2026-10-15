@@ -7,10 +7,30 @@ La solución está separada en un frontend React y una API REST. El frontend con
 ## Estructura del proyecto
 
 ```text
-HTML/             Versión HTML inicial del proyecto.
-IMG/              Imágenes y recursos visuales.
-ProyectoReact/    Frontend desarrollado con React y Vite.
-backend-spring/   API REST desarrollada con Java y Spring Boot.
+MotoRepuestosExpress/
+├── backend-spring/
+│   ├── src/main/java/com/motorepuestos/backend_spring/
+│   │   ├── controller/       Endpoints REST.
+│   │   ├── model/            Entidades del sistema.
+│   │   ├── repository/       Persistencia JDBC y repositorios.
+│   │   └── service/          Lógica de negocio.
+│   ├── src/main/resources/
+│   │   └── application.properties
+│   ├── pom.xml
+│   ├── mvnw
+│   └── mvnw.cmd
+├── ProyectoReact/
+│   ├── src/components/       Componentes reutilizables.
+│   ├── src/context/          Estado global del carrito.
+│   ├── src/pages/            Pantallas de la aplicación.
+│   ├── src/services/         Comunicación con la API.
+│   ├── public/IMG/           Imágenes del frontend.
+│   ├── package.json
+│   └── package-lock.json
+├── HTML/                     Versión HTML inicial.
+├── IMG/                      Recursos visuales originales.
+├── README.md
+└── .gitignore
 ```
 
 ## Tecnologías
@@ -18,6 +38,7 @@ backend-spring/   API REST desarrollada con Java y Spring Boot.
 - Java 21.
 - Spring Boot.
 - Spring Web.
+- Spring JDBC.
 - Spring Data JPA e Hibernate.
 - MySQL.
 - React y Vite.
@@ -119,6 +140,17 @@ El backend debe estar ejecutándose antes de abrir el catálogo React. Se deben 
 
 La API devuelve `400 Bad Request` cuando se envían datos inválidos, `404 Not Found` cuando no existe el identificador solicitado, `200 OK` para consultas y actualizaciones exitosas y `204 No Content` después de una eliminación exitosa.
 
+## Persistencia mediante JDBC
+
+El módulo de productos utiliza `JdbcTemplate` para realizar las operaciones directamente sobre MySQL mediante consultas SQL parametrizadas. Las operaciones implementadas son:
+
+- `SELECT` para consultar productos.
+- `INSERT` para registrar productos.
+- `UPDATE` para actualizar productos.
+- `DELETE` para eliminar productos.
+
+Los módulos de pedidos y usuarios conservan Spring Data JPA para manejar sus entidades relacionadas. De esta manera, el proyecto demuestra tanto el uso explícito de JDBC solicitado para el módulo de productos como la persistencia por capas utilizada en las funcionalidades complementarias.
+
 ## Funcionalidades
 
 - Catálogo por categorías.
@@ -145,7 +177,19 @@ El backend aplica una arquitectura por capas relacionada con MVC:
 - `repository`: acceso a datos mediante Spring Data JPA.
 - `service`: lógica de negocio.
 - `controller`: endpoints REST.
+- `JdbcTemplate`: conexión y ejecución de consultas SQL del módulo de productos.
 - React: interfaz visual del usuario.
+
+## Estándares de codificación
+
+El código aplica convenciones de nombramiento para facilitar su lectura y mantenimiento:
+
+- Las clases utilizan PascalCase: `Producto`, `ProductoService`, `ProductoController` y `ProductoJdbcRepository`.
+- Los métodos utilizan camelCase y describen su acción: `listarProductos`, `buscarPorId`, `guardarProducto` y `eliminarProducto`.
+- Las variables utilizan camelCase: `producto`, `jdbcTemplate`, `resultSet` y `keyHolder`.
+- Los paquetes se escriben en minúscula y siguen una estructura organizada: `controller`, `model`, `repository` y `service`.
+- Los nombres se relacionan con la responsabilidad de cada clase, método o variable.
+- Las clases y métodos principales contienen comentarios que explican su propósito.
 
 ## Versiones del proyecto
 
@@ -169,6 +213,7 @@ Las operaciones principales fueron verificadas en Postman:
 - Rechazo de credenciales incorrectas con respuesta `401 Unauthorized`.
 - Rechazo de correo duplicado con respuesta `409 Conflict`.
 - Creación de pedido con respuesta `201 Created` y actualización del stock.
+- CRUD de productos ejecutado mediante JDBC y probado con Postman.
 
 También se verificó el módulo `/admin` de React, incluyendo la edición y actualización de un producto desde la interfaz.
 

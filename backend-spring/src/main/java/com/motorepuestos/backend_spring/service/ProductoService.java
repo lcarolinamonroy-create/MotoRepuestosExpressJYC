@@ -1,7 +1,7 @@
 package com.motorepuestos.backend_spring.service;
 
 import com.motorepuestos.backend_spring.model.Producto;
-import com.motorepuestos.backend_spring.repository.ProductoRepository;
+import com.motorepuestos.backend_spring.repository.ProductoJdbcRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,37 +13,41 @@ import java.util.Optional;
 @Service
 public class ProductoService {
 
-    private final ProductoRepository productoRepository;
+    private final ProductoJdbcRepository productoJdbcRepository;
 
-    public ProductoService(ProductoRepository productoRepository) {
-        this.productoRepository = productoRepository;
+    public ProductoService(ProductoJdbcRepository productoJdbcRepository) {
+        this.productoJdbcRepository = productoJdbcRepository;
     }
 
     /**
      * Consulta todos los productos registrados.
      */
     public List<Producto> listarProductos() {
-        return productoRepository.findAll();
+        return productoJdbcRepository.listarTodos();
     }
 
     /**
      * Busca un producto por su identificador.
      */
     public Optional<Producto> buscarPorId(Long id) {
-        return productoRepository.findById(id);
+        return productoJdbcRepository.buscarPorId(id);
     }
 
     /**
      * Guarda un producto nuevo o actualiza uno existente.
      */
     public Producto guardarProducto(Producto producto) {
-        return productoRepository.save(producto);
+        if (producto.getId() == null) {
+            return productoJdbcRepository.insertar(producto);
+        }
+
+        return productoJdbcRepository.actualizar(producto);
     }
 
     /**
      * Elimina un producto por su identificador.
      */
     public void eliminarProducto(Long id) {
-        productoRepository.deleteById(id);
+        productoJdbcRepository.eliminar(id);
     }
 }
