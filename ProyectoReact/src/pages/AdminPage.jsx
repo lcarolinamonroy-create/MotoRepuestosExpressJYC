@@ -5,6 +5,7 @@ import {
   updateProduct
 } from "../services/productService";
 
+// Valores iniciales del formulario de edición de productos.
 const emptyForm = {
   nombre: "",
   categoria: "",
@@ -13,12 +14,14 @@ const emptyForm = {
 };
 
 export default function AdminPage() {
+   // Estados utilizados para productos, edición, formulario y mensajes.
   const [products, setProducts] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState(emptyForm);
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+   // Consulta los productos almacenados en el backend.
   async function loadProducts() {
     try {
       setErrorMessage("");
@@ -32,6 +35,7 @@ export default function AdminPage() {
     loadProducts();
   }, []);
 
+  // Carga los datos del producto seleccionado en el formulario.
   function startEditing(product) {
     setEditingId(product.id);
     setFormData({
@@ -43,17 +47,18 @@ export default function AdminPage() {
     setMessage("");
     setErrorMessage("");
   }
+// Cancela la edición y limpia el formulario.
 
   function cancelEditing() {
     setEditingId(null);
     setFormData(emptyForm);
   }
-
+// Actualiza el campo modificado del formulario.
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData(current => ({ ...current, [name]: value }));
   }
-
+// Envía los cambios del producto al backend y actualiza la tabla.
   async function saveProduct(event) {
     event.preventDefault();
 
@@ -74,7 +79,7 @@ export default function AdminPage() {
       setErrorMessage(error.message);
     }
   }
-
+// Elimina un producto después de solicitar confirmación al usuario.
   async function removeProduct(id) {
     if (!window.confirm("¿Deseas eliminar este producto?")) {
       return;

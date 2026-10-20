@@ -2,6 +2,7 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import { loginUser } from "../services/authService";
 
+// Gestiona el formulario de inicio de sesión de los usuarios.
 export default function LoginPage(){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,18 +10,24 @@ export default function LoginPage(){
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+ // Envía las credenciales al backend y muestra el resultado.
   async function handleSubmit(event) {
     event.preventDefault();
+     // Limpia los mensajes anteriores antes de realizar una nueva solicitud
     setMessage("");
     setErrorMessage("");
 
     try {
       setIsSubmitting(true);
+      // El servicio envía el correo y la contraseña a Spring Boot.
       const data = await loginUser({ correo: email, contrasena: password });
+      // Muestra el mensaje enviado por el backend cuando el acceso es correcto.
       setMessage(`${data.mensaje}, ${data.nombre}.`);
     } catch (error) {
+      // Muestra el error cuando las credenciales no son válidas.
       setErrorMessage(error.message);
     } finally {
+      // Habilita nuevamente el botón después de finalizar la solicitud.
       setIsSubmitting(false);
     }
   }

@@ -1,31 +1,40 @@
 import {useState} from "react";
 import { registerUser } from "../services/authService";
 
+// Gestiona el formulario de registro de nuevos usuarios.
 export default function RegisterPage(){
+   // Estado que contiene la información ingresada en el formulario.
   const [form, setForm] = useState({
     name:"", lastName:"", documentType:"CC", documentNumber:"", phone:"",
     email:"", username:"", password:"", confirmPassword:"", acceptsTerms:false
   });
+
+   // Estados para mostrar mensajes y controlar el envío del formulario.
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Actualiza el valor de los campos de texto y de la casilla de términos
   function handleChange(event) {
     const newValue = event.target.type === "checkbox" ? event.target.checked : event.target.value;
     setForm({...form, [event.target.name]: newValue});
   }
-
+ // Valida la información y registra el usuario en el backend.
   async function handleSubmit(event) {
     event.preventDefault();
+    // Limpia los mensajes anteriores.
     setMessage("");
     setErrorMessage("");
+    // Verifica que las contraseñas ingresadas coincidan.
     if (form.password !== form.confirmPassword) {
       setErrorMessage("Las contraseñas no coinciden.");
       return;
     }
 
     try {
-      setIsSubmitting(true);
+       setIsSubmitting(true);
+        // Envía al backend los datos con los nombres esperados por Spring Boot.
+
       await registerUser({
         nombre: form.name,
         apellido: form.lastName,
@@ -36,11 +45,15 @@ export default function RegisterPage(){
         nombreUsuario: form.username,
         contrasena: form.password
       });
+
+       // Informa que la cuenta fue creada correctamente.
       setMessage("Cuenta creada correctamente. Ya puedes iniciar sesión.");
       setForm({ ...form, password: "", confirmPassword: "" });
     } catch (error) {
+       // Muestra el mensaje recibido desde el backend.
       setErrorMessage(error.message);
     } finally {
+      // Habilita nuevamente el botón al terminar la solicitud.
       setIsSubmitting(false);
     }
   }

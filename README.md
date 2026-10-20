@@ -4,6 +4,12 @@ Aplicación web académica para consultar y gestionar repuestos y accesorios par
 
 La solución está separada en un frontend React y una API REST. El frontend consulta la información de productos y el módulo de administración permite actualizar y eliminar registros almacenados en MySQL.
 
+## Framework web utilizado
+
+Para el desarrollo de la aplicación web se utilizó React con Vite en el frontend y Spring Boot en el backend.
+
+React permite construir la interfaz mediante componentes reutilizables, mientras que Spring Boot expone los servicios REST que se conectan con MySQL.
+
 ## Estructura del proyecto
 
 ```text
@@ -158,7 +164,7 @@ Los módulos de pedidos y usuarios conservan Spring Data JPA para manejar sus en
 - Búsqueda y filtro por categoría.
 - Carrito de compras.
 - Cálculo del total.
-- API REST para consultar y registrar productos.
+- API REST para consultar, registrar, actualizar y eliminar productos.
 - Administración de inventario desde React.
 - Operaciones CRUD de productos.
 - Registro e inicio de sesión de usuarios.
@@ -174,7 +180,7 @@ Los módulos de pedidos y usuarios conservan Spring Data JPA para manejar sus en
 El backend aplica una arquitectura por capas relacionada con MVC:
 
 - `model`: entidad `Producto`.
-- `repository`: acceso a datos mediante Spring Data JPA.
+- `repository`: acceso a datos mediante JDBC para productos y Spring Data JPA para pedidos y usuarios.
 - `service`: lógica de negocio.
 - `controller`: endpoints REST.
 - `JdbcTemplate`: conexión y ejecución de consultas SQL del módulo de productos.
@@ -193,9 +199,10 @@ El código aplica convenciones de nombramiento para facilitar su lectura y mante
 
 ## Versiones del proyecto
 
-- `main`: versión integrada y entregable del proyecto.
+- `main`: versión estable publicada del proyecto.
+- `aa2-ev01-jdbc`: versión utilizada para implementar y probar el acceso JDBC del módulo de productos.
 - `version-h2`: respaldo de la versión funcional con base de datos H2 en memoria.
-- `migracion-mysql`: rama utilizada para realizar la migración y completar el CRUD antes de fusionarla en `main`.
+- `migracion-mysql`: rama utilizada durante la migración de H2 a MySQL.
 
 La versión H2 se conserva como respaldo académico. La versión MySQL permite mantener los productos después de reiniciar el backend.
 
