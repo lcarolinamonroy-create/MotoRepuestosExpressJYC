@@ -1,8 +1,8 @@
 # Moto Repuestos Express JYC
 
-Aplicación web académica para consultar y gestionar repuestos y accesorios para motocicletas. El proyecto conserva una versión HTML inicial y una versión integrada con React, Spring Boot, Java y MySQL.
+Aplicación web académica para consultar y gestionar repuestos y accesorios para motocicletas. La versión final de entrega está integrada con React, Spring Boot, Java, Maven y MySQL.
 
-La solución está separada en un frontend React y una API REST. El frontend consulta la información de productos y el módulo de administración permite actualizar y eliminar registros almacenados en MySQL.
+La solución está separada en un frontend React y una API REST. El frontend consulta la información de productos y el módulo de administración permite actualizar y eliminar registros almacenados en MySQL. Las carpetas HTML y los respaldos de versiones anteriores son antecedentes del proyecto y no forman parte de la arquitectura activa de entrega.
 
 ## Framework web utilizado
 
@@ -201,10 +201,9 @@ El código aplica convenciones de nombramiento para facilitar su lectura y mante
 
 - `main`: versión estable publicada del proyecto.
 - `aa2-ev01-jdbc`: versión utilizada para implementar y probar el acceso JDBC del módulo de productos.
-- `version-h2`: respaldo de la versión funcional con base de datos H2 en memoria.
 - `migracion-mysql`: rama utilizada durante la migración de H2 a MySQL.
 
-La versión H2 se conserva como respaldo académico. La versión MySQL permite mantener los productos después de reiniciar el backend.
+La versión final utiliza exclusivamente MySQL. H2 no forma parte de las dependencias, la configuración ni la ejecución actual del backend.
 
 ## Pruebas realizadas
 
@@ -213,8 +212,7 @@ Las operaciones principales fueron verificadas en Postman:
 - `GET` de todos los productos con respuesta `200 OK`.
 - `PUT` de un producto con respuesta `200 OK`.
 - `DELETE` de un producto con respuesta `204 No Content`.
-- `GET` posterior a la eliminación con respuesta `404 Not Found`.
-- Solicitud inválida con precio y stock negativos con respuesta `400 Bad Request`.
+- Validación de registro con datos inválidos y respuesta `400 Bad Request`.
 - Registro exitoso de usuario con respuesta `201 Created`.
 - Inicio de sesión correcto con respuesta `200 OK`.
 - Rechazo de credenciales incorrectas con respuesta `401 Unauthorized`.
@@ -226,7 +224,7 @@ También se verificó el módulo `/admin` de React, incluyendo la edición y act
 
 ## Nota técnica
 
-La autenticación, los pedidos y los pagos todavía corresponden a funcionalidades de continuidad. Para una versión productiva se requiere autenticación segura, control de usuarios, persistencia de pedidos y una pasarela de pagos autorizada.
+La versión actual implementa registro, autenticación básica mediante correo y contraseña cifrada con BCrypt, persistencia de pedidos y descuento de inventario. La recuperación de contraseña mediante correo y token, la autenticación mediante JWT, la autorización avanzada por roles y la integración con una pasarela de pagos se consideran mejoras futuras para una versión productiva.
 
 ## Repositorio
 

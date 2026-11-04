@@ -2,6 +2,9 @@ package com.motorepuestos.backend_spring.service;
 
 import com.motorepuestos.backend_spring.model.Usuario;
 import com.motorepuestos.backend_spring.repository.UsuarioRepository;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -113,13 +116,22 @@ public class UsuarioService {
      * @param contrasena contraseña de acceso
      */
     public record RegistroRequest(
+            @NotBlank(message = "El nombre es obligatorio")
             String nombre,
+            @NotBlank(message = "El apellido es obligatorio")
             String apellido,
+            @NotBlank(message = "El tipo de documento es obligatorio")
             String tipoDocumento,
+            @NotBlank(message = "El número de documento es obligatorio")
             String numeroDocumento,
             String telefono,
+            @NotBlank(message = "El correo es obligatorio")
+            @Email(message = "El correo no tiene un formato válido")
             String correo,
+            @NotBlank(message = "El nombre de usuario es obligatorio")
             String nombreUsuario,
+            @NotBlank(message = "La contraseña es obligatoria")
+            @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
             String contrasena
     ) {
     }

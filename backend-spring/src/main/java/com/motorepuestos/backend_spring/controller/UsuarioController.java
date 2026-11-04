@@ -3,6 +3,7 @@ package com.motorepuestos.backend_spring.controller;
 import com.motorepuestos.backend_spring.model.Usuario;
 import com.motorepuestos.backend_spring.service.UsuarioService;
 import com.motorepuestos.backend_spring.service.UsuarioService.RegistroRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,7 +41,7 @@ public class UsuarioController {
      */
     @PostMapping("/registro")
     public ResponseEntity<?> registrar(
-            @RequestBody RegistroRequest datos) {
+            @Valid @RequestBody RegistroRequest datos) {
 
         try {
             usuarioService.registrar(datos);
