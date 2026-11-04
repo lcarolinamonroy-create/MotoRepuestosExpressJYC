@@ -1,5 +1,12 @@
 Repositorio del proyecto Moto Repuestos Express JYC:
 https://github.com/lcarolinamonroy-create/MotoRepuestosExpressJYC
 
-Página publicada del prototipo original:
+Aplicación frontend React en ambiente local:
+http://localhost:5173
+
+API REST Spring Boot en ambiente local:
+http://localhost:8080/api/productos
+
+Nota:
+La siguiente URL corresponde únicamente al prototipo HTML histórico y no a la versión final integrada:
 https://lcarolinamonroy-create.github.io/MotoRepuestosExpressJYC/HTML/index.html

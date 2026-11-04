@@ -5,7 +5,15 @@ const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
-    return JSON.parse(localStorage.getItem("carrito") || "[]");
+    try {
+      const savedItems = JSON.parse(localStorage.getItem("carrito") || "[]");
+      return savedItems.map(item => ({
+        ...item,
+        cantidad: Number(item.cantidad) > 0 ? Number(item.cantidad) : 1
+      }));
+    } catch {
+      return [];
+    }
   });
 
   function saveCart(nextItems) {
@@ -14,15 +22,44 @@ export function CartProvider({ children }) {
   }
 
   function addToCart(product) {
-    saveCart([...cartItems, product]);
+    const existingItem = cartItems.find(item => item.id === product.id);
+
+    if (existingItem) {
+      const nextItems = cartItems.map(item => {
+        if (item.id !== product.id) return item;
+
+        const stock = Number(item.stock) || Number(product.stock) || Infinity;
+        return { ...item, cantidad: Math.min(item.cantidad + 1, stock) };
+      });
+      saveCart(nextItems);
+      return;
+    }
+
+    saveCart([{ ...product, cantidad: 1 }, ...cartItems]);
   }
 
-  function removeFromCart(index) {
-    saveCart(cartItems.filter((_, itemIndex) => itemIndex !== index));
+  function removeFromCart(productId) {
+    saveCart(cartItems.filter(item => item.id !== productId));
   }
 
   function clearCart() {
     saveCart([]);
+  }
+
+  function updateQuantity(productId, nextQuantity) {
+    const nextItems = cartItems
+      .map(item => {
+        if (item.id !== productId) return item;
+
+        const stock = Number(item.stock) || Infinity;
+        return {
+          ...item,
+          cantidad: Math.min(Math.max(nextQuantity, 0), stock)
+        };
+      })
+      .filter(item => item.cantidad > 0);
+
+    saveCart(nextItems);
   }
 
   const value = useMemo(() => ({
@@ -30,8 +67,12 @@ export function CartProvider({ children }) {
     addToCart,
     removeFromCart,
     clearCart,
-    cartCount: cartItems.length,
-    cartTotal: cartItems.reduce((total, item) => total + item.precio, 0)
+    updateQuantity,
+    cartCount: cartItems.reduce((total, item) => total + item.cantidad, 0),
+    cartTotal: cartItems.reduce(
+      (total, item) => total + item.precio * item.cantidad,
+      0
+    )
   }), [cartItems]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -1,9 +1,11 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
+// Gestiona la pantalla de recuperación de contraseña
 export default function ForgotPasswordPage(){
   const [email, setEmail] = useState("");
 
+// Simula el envío de la solicitud de recuperación.
   function handleSubmit(event) {
     event.preventDefault();
     alert(`Solicitud de recuperación enviada para ${email}.`);

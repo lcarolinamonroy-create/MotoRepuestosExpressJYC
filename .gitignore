@@ -1,3 +1,21 @@
-ProyectoReact/node_modules/
-ProyectoReact/dist/
-backend-spring/target/
+# Dependencias de React
+node_modules/
+**/node_modules/
+
+# Archivos generados por React
+dist/
+**/dist/
+
+# Archivos generados por Spring Boot
+target/
+**/target/
+
+# Configuraciones privadas
+.env
+**/.env
+*.env
+
+# Archivos comprimidos y temporales
+*.zip
+*.rar
+desktop.ini
