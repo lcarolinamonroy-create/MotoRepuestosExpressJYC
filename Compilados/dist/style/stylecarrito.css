@@ -1,0 +1,315 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background: linear-gradient(90deg, #7a2323, #aa3642, #d94c5a);
+  color: #333;
+  min-height: 100vh;
+}
+
+header {
+  background: #fff;
+  padding: 15px 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  max-height: 60px;
+  margin-right: 12px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+header .logo img {
+  max-height: 60px;
+}
+.logo img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+header h1 {
+  flex-grow: 1;
+  text-align: center;
+  color: #7a2323;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+header .icon-link {
+  font-size: 1.2em;
+  color: #7a2323;
+  font-weight: bold;
+  text-decoration: none;
+   padding: 8px 14px;
+  border: 2px solid #7a2323;
+  border-radius: 6px;
+  transition: color 0.3s ease;
+}
+
+header .icon-link:hover {
+  color: #aa3642;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;       /* más grande */
+  font-weight: bold;
+  color: #e7dddd;
+  margin: 25px 0 15px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+  letter-spacing: 1px;
+}
+
+main#carrito {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 760px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  animation: fadeIn 0.4s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main#carrito h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #7a2323;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.25); /* sombra elegante */
+  position: relative;
+}
+
+main#carrito h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #aa3642;
+  border-radius: 2px;
+}
+
+#lista-carrito {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+#lista-carrito li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s ease;
+  gap: 12px;
+}
+#lista-carrito li:hover {
+  background: #fdf2f2; /* efecto hover suave */
+}
+
+#lista-carrito img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+#lista-carrito .nombre {
+  flex-grow: 1;
+  font-size: 1.05em;
+}
+#lista-carrito .precio {
+  font-weight: bold;
+  color: #7a2323;
+}
+
+.btn-eliminar {
+  margin-left: 12px;
+  padding: 6px 10px;
+  border: 1px solid #aa3642;
+  border-radius: 5px;
+  background: #fff;
+  color: #7a2323;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  background: #fdf2f2;
+}
+
+.btn-eliminar:focus-visible,
+.acciones button:focus-visible,
+.modal-contenido button:focus-visible,
+.icon-link:focus-visible {
+  outline: 3px solid #f2c400;
+  outline-offset: 3px;
+}
+
+#total {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #aa3642;
+  text-align: right;
+  margin-top: 20px;
+  border-top: 2px solid #eee;
+  padding-top: 10px;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.acciones button {
+  flex: 1;
+  background: linear-gradient(90deg, #7a2323, #aa3642);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* espacio entre icono y texto */
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.acciones button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #aa3642, #d94c5a);
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #fff;
+  margin-top: 30px;
+  color: #7a2323;
+  font-size: 0.9em;
+}
+
+/* Fondo del modal */
+.modal {
+  display: none; /* oculto por defecto */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6); /* fondo oscuro */
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease-in-out; /* animación al abrir */
+}
+
+/* Contenedor del formulario */
+.modal-contenido {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  animation: slideUp 0.4s ease-in-out; /* animación de entrada */
+}
+
+/* Estilos del formulario */
+.modal-contenido h2 {
+  margin-bottom: 15px;
+  color: #7a2323;
+  text-align: center;
+}
+
+.modal-contenido form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-contenido label {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+.modal-contenido input {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.modal-contenido select {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Botón de pagar */
+.modal-contenido button[type="submit"] {
+  margin-top: 20px;
+  padding: 10px;
+  background: #7a2323;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.modal-contenido button[type="submit"]:hover {
+  background: #aa3642;
+}
+
+/* Botón cerrar */
+#cerrar {
+  margin-top: 15px;
+  align-items: center;
+  display: block;
+  padding: 8px 20px;
+  background: #ccc;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#cerrar:hover {
+  background: #999;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  header { padding: 14px 18px; gap: 12px; }
+  header h1 { display: none; }
+  header .icon-link { font-size: .9rem; padding: 8px 10px; }
+  h1 { font-size: 1.7rem; }
+  main#carrito { margin: 24px 14px; padding: 18px 14px; }
+  #lista-carrito li { align-items: flex-start; flex-wrap: wrap; }
+  #lista-carrito .nombre { min-width: 55%; }
+  .btn-eliminar { margin-left: auto; }
+  .acciones { flex-direction: column; }
+}
+
+
